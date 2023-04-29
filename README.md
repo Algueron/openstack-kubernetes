@@ -18,9 +18,9 @@ openstack project create --description 'Terraform Hosts for provisioning' terraf
 ````bash
 openstack user create --project terraform --password PASSWORD terraform
 ````
-- Assign the role admin to terraform
+- Assign the role member to terraform
 ````bash
-openstack role add --user terraform --project terraform admin
+openstack role add --user terraform --project terraform member
 ````
 - Download the terraform [credentials file](terraform-openrc.sh)
 ````bash
@@ -68,6 +68,10 @@ openstack security group rule create --remote-ip "192.168.0.0/24" --protocol tcp
 ````bash
 openstack keypair create --private-key terraform.key --type ssh terraform-key
 ````
+- Set the correct permissions on the private key
+````bash
+chmod 400 terraform.key
+````
 
 ### Virtual Machine
 
@@ -88,25 +92,52 @@ TF_FLOATING_IP=$(openstack floating ip list -f value -c "Floating IP Address")
 openstack server add floating ip terraform $TF_FLOATING_IP
 ````
 
-## Terraform Setup
+### Terraform Setup
 
- - Install gpg.
+- Log into the Terraform VM using the floating ip and private key
+````bash
+ssh -i terraform.key ubuntu@$TF_FLOATING_IP
+````
+- Install gpg.
 ````bash
 sudo apt install gpg
 ````
- - Download the signing key to a new keyring.
+- Download the signing key to a new keyring.
 ````bash
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
 ````
- - Verify the key's fingerprint.
+- Verify the key's fingerprint.
 ````bash
 gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
 ````
- - Add the official HashiCorp Linux repository.
+- Add the official HashiCorp Linux repository.
 ````bash
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 ````
- - Update and install Terraform.
+- Update and install Terraform.
 ````bash
 sudo apt-get update && sudo apt-get install terraform
+````
+
+## Kubernetes Infrastructure setup
+
+- Log as Openstack admin user
+````bash
+source admin-openrc.sh
+````
+- Create the Kubernetes project
+````bash
+openstack project create --description 'Kubernetes Home Cluster' kubernetes --domain default
+````
+- Create a Kubernetes user
+````bash
+openstack user create --project kubernetes --password PASSWORD kubernetes
+````
+- Assign the role member to kubernetes
+````bash
+openstack role add --user kubernetes --project kubernetes member
+````
+- Increase the quotas for the Kubernetes project
+````bash
+openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgroups 20 kubernetes
 ````
