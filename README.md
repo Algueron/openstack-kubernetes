@@ -69,9 +69,21 @@ openstack security group rule create --remote-ip "192.168.0.0/24" --protocol tcp
 openstack keypair create --private-key terraform.key --type ssh terraform-key
 ````
 
-### Create the Virtual Machine
+### Virtual Machine
 
 - Create an Ubuntu virtual machine
 ````bash
 openstack server create --flavor t2.small --image ubuntu-server-22.04 --network terraform-net --security-group default --security-group allow-ssh --key-name terraform-key terraform
+````
+- Create a Floating IP
+````bash
+openstack floating ip create public-net
+````
+- Store the IP generated
+````bash
+TF_FLOATING_IP=$(openstack floating ip list -f value -c "Floating IP Address")
+````
+- Assign the floating IP to the Virtual Machine
+````bash
+openstack server add floating ip terraform $TF_FLOATING_IP
 ````
