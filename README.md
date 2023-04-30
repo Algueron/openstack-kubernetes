@@ -121,6 +121,7 @@ sudo apt-get update && sudo apt-get install terraform
 
 ## Kubernetes Infrastructure setup
 
+### Project creation
 - Log as Openstack admin user
 ````bash
 source admin-openrc.sh
@@ -140,4 +141,31 @@ openstack role add --user kubernetes --project kubernetes member
 - Increase the quotas for the Kubernetes project
 ````bash
 openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgroups 20 kubernetes
+````
+
+### Deployment
+
+ - Clone this repository
+````bash
+git clone https://github.com/Algueron/openstack-kubernetes.git
+````
+ - Move into the directory
+````bash
+cd openstack-kubernetes
+````
+ - Download Terraform requirements
+````bash
+terraform init
+````
+ - Validate the scripts
+````bash
+terraform validate
+````
+ - Plan the deployment
+````bash
+terraform plan -out myplan -var "os_api_url=https://192.168.0.5:5000/v2.0" -var "os_project=kubernetes" -var "os_user=kubernetes" -var "os_password=PASSWORD"
+````
+ - Deploy
+````bash
+terraform apply myplan
 ````
