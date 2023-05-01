@@ -160,3 +160,10 @@ openstack role add --user kubernetes --project kubernetes member
 ````bash
 openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgroups 20 kubernetes
 ````
+
+### Deployment
+
+ - Clone this repository
+````bash
+git clone https://github.com/Algueron/openstack-kubernetes.git
+````
