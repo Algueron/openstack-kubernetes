@@ -2,7 +2,7 @@
 Terraform and Ansible project to setup a Kubernetes cluster on Openstack. 
 I'll use custom scripts instead of managed Kubernetes to try to keep the Kubernetes cluster as "Cloud Agnostic" as possible.
 
-## Terraform Infrastructure setup
+## Terraform Setup
 
 ### Project creation
 
@@ -119,6 +119,24 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://
 sudo apt-get update && sudo apt-get install terraform
 ````
 
+## Kubespray Setup
+
+ - Install PIP
+````bash
+sudo apt install -y python3-pip
+````
+ - Clone Kubespray repository
+````bash
+cd ~/
+git clone https://github.com/kubernetes-sigs/kubespray.git
+cd kubespray
+git checkout release-2.21
+````
+ - Install Kubespray requirements
+````bash
+sudo pip3 install -r requirements.txt
+````
+
 ## Kubernetes Infrastructure setup
 
 ### Project creation
@@ -141,31 +159,4 @@ openstack role add --user kubernetes --project kubernetes member
 - Increase the quotas for the Kubernetes project
 ````bash
 openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgroups 20 kubernetes
-````
-
-### Deployment
-
- - Clone this repository
-````bash
-git clone https://github.com/Algueron/openstack-kubernetes.git
-````
- - Move into the directory
-````bash
-cd openstack-kubernetes
-````
- - Download Terraform requirements
-````bash
-terraform init
-````
- - Validate the scripts
-````bash
-terraform validate
-````
- - Plan the deployment
-````bash
-terraform plan -out myplan -var "os_api_url=https://192.168.0.5:5000/v2.0" -var "os_project=kubernetes" -var "os_user=kubernetes" -var "os_password=PASSWORD"
-````
- - Deploy
-````bash
-terraform apply myplan
 ````
