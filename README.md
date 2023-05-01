@@ -186,5 +186,13 @@ vi ~/openstack-kubernetes/inventory/mycluster/cluster.tfvars
 ````
 - Retrieve the value for property external_net
 ````bash
-EXT_NET_UUID=$(openstack network show -f value -c id public-net)
+external_net=$(openstack network show -f value -c id public-net)
+````
+- Retrieve the value for property flavor_k8s_master
+````bash
+flavor_k8s_master=$(openstack flavor show -f value -c id t2.medium)
+````
+- Retrieve the value for property flavor_k8s_master
+````bash
+flavor_k8s_master=$(openstack flavor show -f value -c id t2.medium)
 ````
