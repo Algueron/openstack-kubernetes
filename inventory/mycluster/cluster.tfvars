@@ -1,8 +1,20 @@
+###################################################
+#                                                 #
+#                      General                    #
+#                                                 #
+###################################################
+
 # All OpenStack resources will use the Terraform variablecluster_name (defaultexample) in their name to make it easier to track. For example the first compute resource will be namedexample-kubernetes-1.
 cluster_name = "production"
 
 # List of Availability Zones available in your OpenStack cluster.
 az_list = ["nova"]
+
+###################################################
+#                                                 #
+#                     Networking                  #
+#                                                 #
+###################################################
 
 # The name to be given to the internal network that will be generated
 network_name = "kubernetes-net"
@@ -19,11 +31,23 @@ floatingip_pool = "public-net"
 # UUID of the external network that will be routed to
 external_net = "<UUID>"
 
+###################################################
+#                                                 #
+#                      Flavors                    #
+#                                                 #
+###################################################
+
 # UUID of the flavor to use for master + etcd nodes
 flavor_k8s_master = "<UUID>"
 
 # UUID of the flavor to use for worker nodes
 flavor_k8s_node = "<UUID>"
+
+###################################################
+#                                                 #
+#                       Images                    #
+#                                                 #
+###################################################
 
 # Name of the image to use in provisioning the compute resources. Should already be loaded into glance.
 image = "ubuntu-server-22.04"
@@ -34,7 +58,14 @@ ssh_user = "ubuntu"
 # Path on your local workstation to the public key file you wish to use in creating the key pairs
 public_key_path = "~/.ssh/id_rsa.pub"
 
+###################################################
+#                                                 #
+#                     Instances                   #
+#                                                 #
+###################################################
 
+# 
+number_of_k8s_masters
 
 # 0|1 bastion nodes
 number_of_bastions = 0
