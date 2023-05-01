@@ -140,6 +140,7 @@ sudo pip3 install -r requirements.txt
 ## Kubernetes Infrastructure setup
 
 ### Project creation
+
 - Log as Openstack admin user
 ````bash
 source admin-openrc.sh
@@ -161,7 +162,7 @@ openstack role add --user kubernetes --project kubernetes member
 openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgroups 20 kubernetes
 ````
 
-### Deployment
+### Credentials Setup
 
 - Clone this repository
 ````bash
@@ -175,4 +176,15 @@ mv openstack-kubernetes/clouds.yaml ~/.config/openstack
 - Edit the file to change the password property
 ````bash
 vi ~/.config/openstack/clouds.yaml
+````
+
+### Terraform configuration
+
+- Edit the Terraform variables file
+````bash
+vi ~/openstack-kubernetes/inventory/mycluster/cluster.tfvars
+````
+- Retrieve the value for property external_net
+````bash
+EXT_NET_UUID=$(openstack network show -f value -c id public-net)
 ````
