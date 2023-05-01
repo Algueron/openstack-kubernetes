@@ -19,14 +19,22 @@ floatingip_pool = "public-net"
 # UUID of the external network that will be routed to
 external_net = "<UUID>"
 
-# SSH key to use for access to nodes
+# UUID of the flavor to use for master + etcd nodes
+flavor_k8s_master = "<UUID>"
+
+# UUID of the flavor to use for worker nodes
+flavor_k8s_node = "<UUID>"
+
+# Name of the image to use in provisioning the compute resources. Should already be loaded into glance.
+image = "ubuntu-server-22.04"
+
+# The username to ssh into the image with. This usually depends on the image you have selected
+ssh_user = "ubuntu"
+
+# Path on your local workstation to the public key file you wish to use in creating the key pairs
 public_key_path = "~/.ssh/id_rsa.pub"
 
-# image to use for bastion, masters, standalone etcd instances, and nodes
-image = "<image name>"
 
-# user on the node (ex. core on Container Linux, ubuntu on Ubuntu, etc.)
-ssh_user = "<cloud-provisioned user>"
 
 # 0|1 bastion nodes
 number_of_bastions = 0
@@ -45,49 +53,10 @@ number_of_k8s_masters_no_floating_ip = 0
 
 number_of_k8s_masters_no_floating_ip_no_etcd = 0
 
-flavor_k8s_master = "<UUID>"
-
-k8s_masters = {
-  # "master-1" = {
-  #   "az"          = "nova"
-  #   "flavor"      = "<UUID>"
-  #   "floating_ip" = true
-  #   "etcd" = true
-  # },
-  # "master-2" = {
-  #   "az"          = "nova"
-  #   "flavor"      = "<UUID>"
-  #   "floating_ip" = false
-  #   "etcd" = true
-  # },
-  # "master-3" = {
-  #   "az"          = "nova"
-  #   "flavor"      = "<UUID>"
-  #   "floating_ip" = true
-  #   "etcd" = true
-  # },
-}
-
-
 # nodes
 number_of_k8s_nodes = 2
 
 number_of_k8s_nodes_no_floating_ip = 4
-
-#flavor_k8s_node = "<UUID>"
-
-# GlusterFS
-# either 0 or more than one
-#number_of_gfs_nodes_no_floating_ip = 0
-#gfs_volume_size_in_gb = 150
-# Container Linux does not support GlusterFS
-#image_gfs = "<image name>"
-# May be different from other nodes
-#ssh_user_gfs = "ubuntu"
-#flavor_gfs_node = "<UUID>"
-
-
-
 
 subnet_cidr = "<cidr>"
 
