@@ -121,18 +121,18 @@ sudo apt-get update && sudo apt-get install terraform
 
 ## Kubespray Setup
 
- - Install PIP
+- Install PIP
 ````bash
 sudo apt install -y python3-pip
 ````
- - Clone Kubespray repository
+- Clone Kubespray repository
 ````bash
 cd ~/
 git clone https://github.com/kubernetes-sigs/kubespray.git
 cd kubespray
 git checkout release-2.21
 ````
- - Install Kubespray requirements
+- Install Kubespray requirements
 ````bash
 sudo pip3 install -r requirements.txt
 ````
@@ -163,7 +163,16 @@ openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgro
 
 ### Deployment
 
- - Clone this repository
+- Clone this repository
 ````bash
 git clone https://github.com/Algueron/openstack-kubernetes.git
+````
+- Move the clouds credentials to the appropiate directory
+````bash
+mkdir -p ~/.config/openstack
+mv openstack-kubernetes/clouds.yaml ~/.config/openstack
+````
+- Edit the file to change the password property
+````bash
+vi ~/.config/openstack/clouds.yaml
 ````
