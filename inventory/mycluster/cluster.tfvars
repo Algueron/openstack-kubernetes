@@ -1,8 +1,23 @@
-# your Kubernetes cluster name here
-cluster_name = "i-didnt-read-the-docs"
+# All OpenStack resources will use the Terraform variablecluster_name (defaultexample) in their name to make it easier to track. For example the first compute resource will be namedexample-kubernetes-1.
+cluster_name = "production"
 
-# list of availability zones available in your OpenStack cluster
-#az_list = ["nova"]
+# List of Availability Zones available in your OpenStack cluster.
+az_list = ["nova"]
+
+# The name to be given to the internal network that will be generated
+network_name = "kubernetes-net"
+
+# Use a existing network with the name of network_name. Set to false to create a network with name of network_name.
+use_existing_network = false
+
+# An array of DNS name server names to be used by hosts in the internal subnet.
+dns_nameservers = ["192.168.1.15", "1.1.1.1"]
+
+# Name of the pool from which floating IPs will be allocated
+floatingip_pool = "public-net"
+
+# UUID of the external network that will be routed to
+external_net = "<UUID>"
 
 # SSH key to use for access to nodes
 public_key_path = "~/.ssh/id_rsa.pub"
@@ -71,17 +86,11 @@ number_of_k8s_nodes_no_floating_ip = 4
 #ssh_user_gfs = "ubuntu"
 #flavor_gfs_node = "<UUID>"
 
-# networking
-network_name = "<network>"
 
-# Use a existing network with the name of network_name. Set to false to create a network with name of network_name.
-# use_existing_network = true
 
-external_net = "<UUID>"
 
 subnet_cidr = "<cidr>"
 
-floatingip_pool = "<pool>"
 
 bastion_allowed_remote_ips = ["0.0.0.0/0"]
 
