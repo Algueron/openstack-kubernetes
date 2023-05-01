@@ -1,0 +1,11 @@
+clouds:
+  openstack:
+    auth:
+      auth_url: https://192.168.0.5:5000/v3
+      username: "kubernetes"
+      project_name: "kubernetes"
+      user_domain_name: "Default"
+      password: "password"
+    region_name: "RegionOne"
+    interface: "public"
+    identity_api_version: 3
