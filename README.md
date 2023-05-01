@@ -192,7 +192,7 @@ external_net=$(openstack network show -f value -c id public-net)
 ````bash
 flavor_k8s_master=$(openstack flavor show -f value -c id t2.medium)
 ````
-- Retrieve the value for property flavor_k8s_master
+- Retrieve the value for property flavor_k8s_node
 ````bash
-flavor_k8s_master=$(openstack flavor show -f value -c id t2.medium)
+flavor_k8s_node=$(openstack flavor show -f value -c id t2.xlarge)
 ````
