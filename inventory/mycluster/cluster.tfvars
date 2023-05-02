@@ -64,35 +64,71 @@ public_key_path = "~/.ssh/id_rsa.pub"
 #                                                 #
 ###################################################
 
-# 
-number_of_k8s_masters
-
-# 0|1 bastion nodes
-number_of_bastions = 0
-
-#flavor_bastion = "<UUID>"
-
-# standalone etcds
-number_of_etcd = 0
-
-# masters
-number_of_k8s_masters = 1
-
-number_of_k8s_masters_no_etcd = 0
-
+# Number of nodes that serve as both master and etcd. These can be provisioned with or without floating IP addresses
+number_of_k8s_masters = 3
 number_of_k8s_masters_no_floating_ip = 0
 
+# Number of nodes that serve as just master with no etcd. These can be provisioned with or without floating IP addresses
+number_of_k8s_masters_no_etcd = 0
 number_of_k8s_masters_no_floating_ip_no_etcd = 0
 
-# nodes
-number_of_k8s_nodes = 2
+# Number of pure etcd nodes
+number_of_etcd = 0
 
-number_of_k8s_nodes_no_floating_ip = 4
+# Kubernetes worker nodes. These can be provisioned with or without floating ip addresses.
+number_of_k8s_nodes = 0
+number_of_k8s_nodes_no_floating_ip = 5
 
-subnet_cidr = "<cidr>"
+# Number of bastion hosts to create. Scripts assume this is really just zero or one
+number_of_bastions = 0
 
+# Number of gluster servers to provision.
+number_of_gfs_nodes_no_floating_ip = 0
 
-bastion_allowed_remote_ips = ["0.0.0.0/0"]
+###################################################
+#                                                 #
+#                      Security                   #
+#                                                 #
+###################################################
 
-# Force port security to be null. Some cloud providers do not allow to set port security.
-# force_null_port_security = false
+# If 1, nodes with floating IPs will transmit internal cluster traffic via floating IPs; if 0 private IPs will be used instead. Default value is 1.
+use_access_ip = 1
+
+# Allow to disable port security by setting this to false. true by default
+port_security_enabled = true
+
+# List of CIDR blocks allowed to initiate an API connection, ["0.0.0.0/0"] by default
+master_allowed_remote_ips = ["192.168.0.0/24"]
+
+# List of CIDR allowed to initiate a SSH connection, empty by default
+k8s_allowed_remote_ips = ["192.168.0.0/24"]
+
+# List of CIDR allowed to initiate a SSH connection, ["0.0.0.0/0"] by default
+bastion_allowed_remote_ips = ["192.168.0.0/24"]
+
+# Set null instead of true or false for port_security. false by default
+force_null_port_security = false
+
+###################################################
+#                                                 #
+#                      Storage                    #
+#                                                 #
+###################################################
+
+# Volume type of the root volume for control_plane, 'Default' by default
+# master_volume_type = 
+
+# Volume type of the root volume for nodes, 'Default' by default
+# node_volume_type = 
+
+# Size of the root volume for masters, 0 to use ephemeral storage
+master_root_volume_size_in_gb = 0
+
+# Size of the root volume for nodes, 0 to use ephemeral storage
+node_root_volume_size_in_gb = 0
+
+# Size of the root volume for etcd nodes, 0 to use ephemeral storage
+etcd_root_volume_size_in_gb = 0
+
+# Size of the root volume for bastions, 0 to use ephemeral storage
+bastion_root_volume_size_in_gb = 0
