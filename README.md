@@ -136,6 +136,15 @@ git checkout release-2.21
 ````bash
 sudo pip3 install -r requirements.txt
 ````
+- Clone this repository
+````bash
+git clone https://github.com/Algueron/openstack-kubernetes.git
+````
+- Create the appropriate links between Terraform and Ansible
+````bash
+ln -s ~/kubespray/contrib/terraform/openstack/hosts ~/openstack-kubernetes/inventory/mycluster/
+ln -s ~/kubespray/contrib ~/openstack-kubernetes/inventory/mycluster/
+````
 
 ## Kubernetes Infrastructure setup
 
@@ -164,10 +173,6 @@ openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgro
 
 ### Credentials Setup
 
-- Clone this repository
-````bash
-git clone https://github.com/Algueron/openstack-kubernetes.git
-````
 - Move the clouds credentials to the appropiate directory
 ````bash
 mkdir -p ~/.config/openstack
