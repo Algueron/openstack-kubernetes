@@ -5,6 +5,7 @@ clouds:
       username: "kubernetes"
       project_name: "kubernetes"
       user_domain_name: "Default"
+      project_domain_name: "Default"
       password: "password"
     region_name: "RegionOne"
     interface: "public"
