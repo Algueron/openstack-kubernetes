@@ -201,3 +201,21 @@ flavor_k8s_master=$(openstack flavor show -f value -c id t2.medium)
 ````bash
 flavor_k8s_node=$(openstack flavor show -f value -c id t2.xlarge)
 ````
+
+### Infrastructure provisioning
+
+- Remove a deprecated line "experiments      = [module_variable_optional_attrs]" in versions.tf
+````bash
+vi ~/kubespray/contrib/terraform/openstack/versions.tf
+vi ~/kubespray/contrib/terraform/openstack/modules/compute/versions.tf
+````
+- Dowload the required providers
+````bash
+cd ~/openstack-kubernetes/inventory/mycluster/
+terraform -chdir="contrib/terraform/openstack" init
+````
+- Deploy the infrastructure
+````bash
+cd ~/openstack-kubernetes/inventory/mycluster/
+terraform -chdir="contrib/terraform/openstack" apply -var-file=$PWD/cluster.tfvars
+````
