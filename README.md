@@ -237,3 +237,15 @@ cp ~/kubespray/contrib/terraform/openstack/group_vars/no_floating.yml ~/openstac
 
 ### Kubernetes Deployment
 
+- Move to Kubespray root directory
+````bash
+cd ~/kubespray
+````
+- Check connectivity to all hosts
+````bash
+ansible -i ~/openstack-kubernetes/inventory/mycluster/hosts -m ping all
+````
+- Deploy Kubernetes
+````bash
+
+````
