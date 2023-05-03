@@ -223,6 +223,9 @@ terraform -chdir="contrib/terraform/openstack" init
 cd ~/openstack-kubernetes/inventory/mycluster/
 terraform -chdir="contrib/terraform/openstack" apply -var-file=$PWD/cluster.tfvars
 ````
+- Edit the [Openstack configuration](inventory/mycluster/group_vars/all/openstack.yml) and set the variables using Terraform output
+  - openstack_lbaas_floating_network_id : set with floating_network_id value
+  - openstack_lbaas_subnet_id : set with private_subnet_id value
 - Move the resulting Terrform state file into Ansible inventory
 ````bash
 cp ~/kubespray/contrib/terraform/openstack/terraform.tfstate ~/openstack-kubernetes/inventory/mycluster/
