@@ -145,10 +145,9 @@ git clone https://github.com/Algueron/openstack-kubernetes.git
 ln -s ~/kubespray/contrib/terraform/openstack/hosts ~/openstack-kubernetes/inventory/mycluster/
 ln -s ~/kubespray/contrib ~/openstack-kubernetes/inventory/mycluster/
 ````
-- Create the appropriate links between Kubespray and this repository
+- Create the directory to store Ansible SSH options
 ````bash
-mkdir ~/kubespray/contrib/terraform/openstack/inventory
-ln -s ~/openstack-kubernetes/inventory/mycluster ~/kubespray/contrib/terraform/openstack/inventory/
+mkdir ~/kubespray/contrib/terraform/openstack/group_vars
 ````
 
 ## Kubernetes Infrastructure setup
