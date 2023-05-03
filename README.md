@@ -223,3 +223,14 @@ terraform -chdir="contrib/terraform/openstack" init
 cd ~/openstack-kubernetes/inventory/mycluster/
 terraform -chdir="contrib/terraform/openstack" apply -var-file=$PWD/cluster.tfvars
 ````
+- Move the resulting Terrform state file into Ansible inventory
+````bash
+cp ~/kubespray/contrib/terraform/openstack/terraform.tfstate ~/openstack-kubernetes/inventory/mycluster/
+````
+- Move the Bastion host configuration into Ansible inventory
+````bash
+cp ~/kubespray/contrib/terraform/openstack/group_vars/no_floating.yml ~/openstack-kubernetes/inventory/mycluster/group_vars/
+````
+
+### Kubernetes Deployment
+
