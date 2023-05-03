@@ -5,7 +5,7 @@
 ###################################################
 
 # All OpenStack resources will use the Terraform variablecluster_name (defaultexample) in their name to make it easier to track. For example the first compute resource will be namedexample-kubernetes-1.
-cluster_name = "production"
+cluster_name = "mycluster"
 
 # List of Availability Zones available in your OpenStack cluster.
 az_list = ["nova"]
