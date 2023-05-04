@@ -235,6 +235,20 @@ cp ~/kubespray/contrib/terraform/openstack/terraform.tfstate ~/openstack-kuberne
 cp ~/kubespray/contrib/terraform/openstack/group_vars/no_floating.yml ~/openstack-kubernetes/inventory/mycluster/group_vars/
 ````
 
+### Network tweaking
+
+Being L3 CNI, calico and kube-router do not encapsulate all packages with the hosts' ip addresses. Instead the packets will be routed with the PODs ip addresses directly.
+
+OpenStack will filter and drop all packets from ips it does not know to prevent spoofing.
+
+In order to make L3 CNIs work on OpenStack you will need to tell OpenStack to allow pods packets by allowing the network they use.
+
+- On a node with Openstack client installed, log in as kubernetes user and execute this command
+````bash
+openstack port list --device-owner=compute:nova -c ID -f value | xargs -tI@ openstack port set @ --allowed-address ip-address=10.233.0.0/18 --allowed-address ip-address=10.233.64.0/18
+````
+
+
 ### Kubernetes Deployment
 
 - Move to Kubespray root directory
