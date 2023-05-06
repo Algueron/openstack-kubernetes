@@ -98,13 +98,13 @@ use_access_ip = 1
 port_security_enabled = true
 
 # List of CIDR blocks allowed to initiate an API connection, ["0.0.0.0/0"] by default
-master_allowed_remote_ips = ["192.168.0.0/24"]
+master_allowed_remote_ips = ["0.0.0.0/0"]
 
 # List of CIDR allowed to initiate a SSH connection, empty by default
-k8s_allowed_remote_ips = ["192.168.0.0/24"]
+k8s_allowed_remote_ips = ["0.0.0.0/0"]
 
 # List of CIDR allowed to initiate a SSH connection, ["0.0.0.0/0"] by default
-bastion_allowed_remote_ips = ["192.168.0.0/24"]
+bastion_allowed_remote_ips = ["0.0.0.0/0"]
 
 # Set null instead of true or false for port_security. false by default
 force_null_port_security = false
