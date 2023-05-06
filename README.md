@@ -261,5 +261,5 @@ ansible -i ~/openstack-kubernetes/inventory/mycluster/hosts -m ping all
 ````
 - Deploy Kubernetes
 ````bash
-
+ansible-playbook --become -i ~/openstack-kubernetes/inventory/mycluster/hosts cluster.yml
 ````
