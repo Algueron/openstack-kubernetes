@@ -177,7 +177,7 @@ openstack quota set --cores 32 --instances 15 --ram 131072 --volumes 20 --secgro
 
 ### Credentials Setup
 
-- Move the clouds credentials to the appropiate directory
+- Move the clouds credentials to the appropriate directory
 ````bash
 mkdir -p ~/.config/openstack
 mv openstack-kubernetes/clouds.yaml ~/.config/openstack
