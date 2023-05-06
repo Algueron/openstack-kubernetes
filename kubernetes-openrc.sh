@@ -6,5 +6,6 @@ export OS_PROJECT_NAME=kubernetes
 export OS_USERNAME=kubernetes
 export OS_PASSWORD=PASSWORD
 export OS_AUTH_URL=http://192.168.0.5:5000
+export OS_REGION_NAME=RegionOne
 export OS_INTERFACE=internal
 export OS_ENDPOINT_TYPE=internalURL
