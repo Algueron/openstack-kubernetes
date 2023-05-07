@@ -186,6 +186,10 @@ mv openstack-kubernetes/clouds.yaml ~/.config/openstack
 ````bash
 vi ~/.config/openstack/clouds.yaml
 ````
+- Edit the openrc file to change the password property
+````bash
+vi ~/openstack-kubernetes/kubernetes-openrc.sh
+````
 
 ### Terraform configuration
 
@@ -261,5 +265,7 @@ ansible -i ~/openstack-kubernetes/inventory/mycluster/hosts -m ping all
 ````
 - Deploy Kubernetes
 ````bash
+unset OS_CLOUD
+source ~/openstack-kubernetes/kubernetes-openrc.sh 
 ansible-playbook --become -i ~/openstack-kubernetes/inventory/mycluster/hosts cluster.yml
 ````
