@@ -249,7 +249,7 @@ In order to make L3 CNIs work on OpenStack you will need to tell OpenStack to al
 openstack port list --device-owner=compute:nova -c ID -f value | xargs -tI@ openstack port set @ --allowed-address ip-address=10.233.0.0/18 --allowed-address ip-address=10.233.64.0/18
 ````
 
-###Ansible configuration
+### Ansible configuration
 
 - Edit the [Openstack configuration](inventory/mycluster/group_vars/all/openstack.yml) and set the variables
 
