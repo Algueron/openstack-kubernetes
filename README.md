@@ -227,9 +227,6 @@ terraform -chdir="contrib/terraform/openstack" init
 cd ~/openstack-kubernetes/inventory/mycluster/
 terraform -chdir="contrib/terraform/openstack" apply -var-file=$PWD/cluster.tfvars
 ````
-- Edit the [Openstack configuration](inventory/mycluster/group_vars/all/openstack.yml) and set the variables using Terraform output
-  - openstack_lbaas_floating_network_id : set with floating_network_id value
-  - openstack_lbaas_subnet_id : set with private_subnet_id value
 - Move the resulting Terrform state file into Ansible inventory
 ````bash
 cp ~/kubespray/contrib/terraform/openstack/terraform.tfstate ~/openstack-kubernetes/inventory/mycluster/
@@ -252,6 +249,26 @@ In order to make L3 CNIs work on OpenStack you will need to tell OpenStack to al
 openstack port list --device-owner=compute:nova -c ID -f value | xargs -tI@ openstack port set @ --allowed-address ip-address=10.233.0.0/18 --allowed-address ip-address=10.233.64.0/18
 ````
 
+###Ansible configuration
+
+- Edit the [Openstack configuration](inventory/mycluster/group_vars/all/openstack.yml) and set the variables
+
+- external_openstack_lbaas_network_id
+````bash
+external_openstack_lbaas_network_id=$(openstack network show kubernetes-net -c id -f value)
+````
+- external_openstack_lbaas_subnet_id
+````bash
+external_openstack_lbaas_subnet_id=$(openstack subnet list --network kubernetes-net -c ID -f value)
+````
+- external_openstack_lbaas_floating_network_id
+````bash
+external_openstack_lbaas_floating_network_id=$(openstack network show public-net -c id -f value)
+````
+- external_openstack_lbaas_floating_subnet_id
+````bash
+external_openstack_lbaas_floating_subnet_id=$(openstack subnet list --network public-net -c ID -f value)
+````
 
 ### Kubernetes Deployment
 
