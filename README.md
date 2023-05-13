@@ -286,3 +286,31 @@ unset OS_CLOUD
 source ~/openstack-kubernetes/kubernetes-openrc.sh 
 ansible-playbook --become -i ~/openstack-kubernetes/inventory/mycluster/hosts cluster.yml
 ````
+### Kubernetes client configuration
+
+- Download kubectl
+````bash
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+````
+- Retrieve Kubernetes first master's IP
+````bash
+MASTER_IP=$(openstack-kubernetes/inventory/mycluster/hosts --hostfile | grep mycluster-k8s-master-1 | awk '{print $1'})
+````
+- Get admin configuration file
+````bash
+ssh ubuntu@$MASTER_IP sudo cat /etc/kubernetes/admin.conf > admin.conf
+````
+- Set Master's IP
+````bash
+sed -i -e "s/127.0.0.1/$MASTER_IP/g" admin.conf
+````
+- Copy the configuration to the proper location
+````bash
+mkdir -p ~/.kube
+cp admin.conf $HOME/.kube/config
+````
+- Check kubernetes configuration
+````bash
+./kubectl version
+````
