@@ -248,6 +248,15 @@ In order to make L3 CNIs work on OpenStack you will need to tell OpenStack to al
 ````bash
 openstack port list --device-owner=compute:nova -c ID -f value | xargs -tI@ openstack port set @ --allowed-address ip-address=10.233.0.0/18 --allowed-address ip-address=10.233.64.0/18
 ````
+- Allow ICMP Protocol
+````bash
+openstack security group rule create --remote-ip "0.0.0.0/0" --protocol icmp --ingress mycluster-k8s
+````
+- Allow etcd ports
+````bash
+openstack security group rule create --remote-ip "0.0.0.0/0" --protocol tcp --dst-port 2379 --ingress mycluster-k8s-master
+openstack security group rule create --remote-ip "0.0.0.0/0" --protocol tcp --dst-port 2380 --ingress mycluster-k8s-master
+````
 
 ### Ansible configuration
 
