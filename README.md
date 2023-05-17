@@ -130,7 +130,6 @@ sudo apt install -y python3-pip
 cd ~/
 git clone https://github.com/kubernetes-sigs/kubespray.git
 cd kubespray
-git checkout release-2.21
 ````
 - Install Kubespray requirements
 ````bash
@@ -138,6 +137,7 @@ sudo pip3 install -r requirements.txt
 ````
 - Clone this repository
 ````bash
+cd ~/
 git clone https://github.com/Algueron/openstack-kubernetes.git
 ````
 - Create the appropriate links between Terraform and Ansible
@@ -212,11 +212,6 @@ flavor_k8s_node=$(openstack flavor show -f value -c id t2.xlarge)
 
 ### Infrastructure provisioning
 
-- Remove a deprecated line "experiments      = [module_variable_optional_attrs]" in versions.tf
-````bash
-vi ~/kubespray/contrib/terraform/openstack/versions.tf
-vi ~/kubespray/contrib/terraform/openstack/modules/compute/versions.tf
-````
 - Dowload the required providers
 ````bash
 cd ~/openstack-kubernetes/inventory/mycluster/
