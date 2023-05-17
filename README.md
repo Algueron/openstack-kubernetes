@@ -220,6 +220,7 @@ terraform -chdir="contrib/terraform/openstack" init
 - Deploy the infrastructure
 ````bash
 cd ~/openstack-kubernetes/inventory/mycluster/
+export OS_CLOUD=openstack
 terraform -chdir="contrib/terraform/openstack" apply -var-file=$PWD/cluster.tfvars
 ````
 - Move the resulting Terrform state file into Ansible inventory
