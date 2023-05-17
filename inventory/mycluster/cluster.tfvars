@@ -92,7 +92,7 @@ number_of_gfs_nodes_no_floating_ip = 0
 ###################################################
 
 # If 1, nodes with floating IPs will transmit internal cluster traffic via floating IPs; if 0 private IPs will be used instead. Default value is 1.
-use_access_ip = 0
+use_access_ip = 1
 
 # Allow to disable port security by setting this to false. true by default
 port_security_enabled = true
