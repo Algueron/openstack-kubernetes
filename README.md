@@ -288,9 +288,22 @@ ansible -i ~/openstack-kubernetes/inventory/mycluster/hosts -m ping all
 - Deploy Kubernetes
 ````bash
 unset OS_CLOUD
-source ~/openstack-kubernetes/kubernetes-openrc.sh 
+source ~/openstack-kubernetes/kubernetes-openrc.sh
 ansible-playbook --become -i ~/openstack-kubernetes/inventory/mycluster/hosts cluster.yml
 ````
+
+### Rook volumes provisioning
+
+- Create an additional volume for each worker node
+````bash
+source kubernetes-openrc.sh
+for i in {1..5}
+do
+  openstack volume create --size 150 mycluster-k8s-node-nf-$i-volb
+  openstack server add volume --device /dev/vdb mycluster-k8s-node-nf-$i mycluster-k8s-node-nf-$i-volb
+done
+````
+
 ### Kubernetes client configuration
 
 - Download kubectl
