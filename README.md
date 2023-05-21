@@ -166,9 +166,10 @@ openstack project create --description 'Kubernetes Home Cluster' kubernetes --do
 ````bash
 openstack user create --project kubernetes --password PASSWORD kubernetes
 ````
-- Assign the role member to kubernetes
+- Assign the role member and load-balancer_member to kubernetes
 ````bash
 openstack role add --user kubernetes --project kubernetes member
+openstack role add --user kubernetes --project kubernetes balancer_member
 ````
 - Increase the quotas for the Kubernetes project
 ````bash
