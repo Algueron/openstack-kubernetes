@@ -314,7 +314,7 @@ chmod +x kubectl
 ````
 - Retrieve Kubernetes first master's IP
 ````bash
-MASTER_IP=$(openstack-kubernetes/inventory/mycluster/hosts --hostfile | grep mycluster-k8s-master-1 | awk '{print $1'})
+MASTER_IP=$(~/openstack-kubernetes/inventory/mycluster/hosts --hostfile | grep mycluster-k8s-master-1 | awk '{print $1'})
 ````
 - Get admin configuration file
 ````bash
