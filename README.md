@@ -108,7 +108,7 @@ wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/
 ````
 - Verify the key's fingerprint.
 ````bash
-gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+sudo gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
 ````
 - Add the official HashiCorp Linux repository.
 ````bash
