@@ -208,7 +208,7 @@ flavor_k8s_master=$(openstack flavor show -f value -c id t2.medium)
 ````
 - Retrieve the value for property flavor_k8s_node
 ````bash
-flavor_k8s_node=$(openstack flavor show -f value -c id t2.xlarge)
+flavor_k8s_node=$(openstack flavor show -f value -c id t2.2xlarge)
 ````
 
 ### Infrastructure provisioning
@@ -298,7 +298,7 @@ ansible-playbook --become -i ~/openstack-kubernetes/inventory/mycluster/hosts cl
 - Create an additional volume for each worker node
 ````bash
 source kubernetes-openrc.sh
-for i in {1..5}
+for i in {1..3}
 do
   openstack volume create --size 150 mycluster-k8s-node-nf-$i-volb
   openstack server add volume --device /dev/vdb mycluster-k8s-node-nf-$i mycluster-k8s-node-nf-$i-volb

@@ -65,7 +65,7 @@ public_key_path = "~/.ssh/id_rsa.pub"
 ###################################################
 
 # Number of nodes that serve as both master and etcd. These can be provisioned with or without floating IP addresses
-number_of_k8s_masters = 3
+number_of_k8s_masters = 1
 number_of_k8s_masters_no_floating_ip = 0
 
 # Number of nodes that serve as just master with no etcd. These can be provisioned with or without floating IP addresses
@@ -77,7 +77,7 @@ number_of_etcd = 0
 
 # Kubernetes worker nodes. These can be provisioned with or without floating ip addresses.
 number_of_k8s_nodes = 0
-number_of_k8s_nodes_no_floating_ip = 5
+number_of_k8s_nodes_no_floating_ip = 3
 
 # Number of bastion hosts to create. Scripts assume this is really just zero or one
 number_of_bastions = 0
